@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tracks
   resources :posts
   resources :users
   get "welcome/home"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_23_113646) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_23_115131) do
   create_table "posts", id: { type: :binary, limit: 16 }, force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -19,6 +19,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_113646) do
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_posts_on_id", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "tracks", id: { type: :binary, limit: 16 }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_tracks_on_id", unique: true
   end
 
   create_table "users", id: { type: :binary, limit: 16 }, force: :cascade do |t|
