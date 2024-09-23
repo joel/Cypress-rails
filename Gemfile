@@ -56,9 +56,9 @@ group :development do
   gem "rubocop-gitlab-security", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
-  gem "rubocop-rspec_rails", require: false
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
 
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
