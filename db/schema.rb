@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_23_115131) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_23_120026) do
+  create_table "items", id: { type: :binary, limit: 16 }, force: :cascade do |t|
+    t.string "name"
+    t.binary "track_id", limit: 16, null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_items_on_id", unique: true
+    t.index ["track_id"], name: "index_items_on_track_id"
+  end
+
   create_table "posts", id: { type: :binary, limit: 16 }, force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -35,5 +45,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_115131) do
     t.index ["id"], name: "index_users_on_id", unique: true
   end
 
+  add_foreign_key "items", "tracks"
   add_foreign_key "posts", "users"
 end
