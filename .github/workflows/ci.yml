@@ -24,7 +24,7 @@ jobs:
         name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: ../../bin/rails server -p 3025 -b 0.0.0.0
+          start: "cd ../.. && ./bin/rails server -p 3025 -b 0.0.0.0"
           wait-on: 'http://localhost:3025'
           wait-on-timeout: 10
           working-directory: system/cypress
