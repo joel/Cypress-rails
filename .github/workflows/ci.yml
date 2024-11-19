@@ -33,12 +33,26 @@ jobs:
         run: bundle exec rake
       -
         name: Start Rails server
+        env:
+          RAILS_LOG_TO_STDOUT: true
         run: |
           bin/rails server -p 3025 -b 0.0.0.0 &
           while ! nc -z localhost 3025; do sleep 1; done
       -
+        name: Verify Rails Server Response
+        run: |
+          curl -I http://localhost:3025
+      -
+        name: Check for Pending Migrations
+        run: |
+          bin/rails db:migrate:status
+      -
         name: Install Cypress
-        run: cd system && npm install cypress --save-dev
+        run: |
+          cd system
+          npm ci
       -
         name: Run Cypress tests
-        run: cd system && npx cypress run --browser chrome
+        run: |
+          cd system
+          npx cypress run
