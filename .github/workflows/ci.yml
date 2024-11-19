@@ -37,14 +37,8 @@ jobs:
           bin/rails server -p 3025 -b 0.0.0.0 &
           while ! nc -z localhost 3025; do sleep 1; done
       -
+        name: Install Cypress
+        run: cd system && npm install cypress --save-dev
+      -
         name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          wait-on: 'http://0.0.0.0:3025'
-          wait-on-timeout: 10
-          working-directory: system/cypress
-          config-file: ./system/cypress.config.js
-          project: '../..'
-          record: false
-          publish-summary: true
-          component: false
+        run: cd system && npx cypress run --browser chrome
