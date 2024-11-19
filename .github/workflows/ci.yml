@@ -20,5 +20,18 @@ jobs:
         with:
           ruby-version: 3.3.5
       -
-        name: "Test"
+        name: Run test suite
         run: bundle exec rake
+      -
+        name: Start Rails server
+        env:
+          RAILS_ENV: test
+        run: |
+          bin/rails server -p 3025 -b 0.0.0.0 &
+      -
+        name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          wait-on: 'http://localhost:3025'
+          wait-on-timeout: 60
+          config-file: system/cypress.config.js
