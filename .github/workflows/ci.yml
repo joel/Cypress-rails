@@ -2,6 +2,9 @@ name: CI
 
 on: [ push ]
 
+env:
+  RAILS_ENV: test
+
 jobs:
 
   test:
@@ -21,9 +24,15 @@ jobs:
           ruby-version: 3.3.5
           bundler-cache: true
       -
+        name: Set up Database
+        run: |
+          bin/rails db:create
+          bin/rails db:schema:load
+      -
+        name: Run test suite
+        run: bundle exec rake
+      -
         name: Start Rails server
-        env:
-          RAILS_ENV: test
         run: |
           bin/rails server -p 3025 -b 0.0.0.0 &
           while ! nc -z localhost 3025; do sleep 1; done
