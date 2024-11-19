@@ -43,7 +43,7 @@ jobs:
           wait-on: 'http://0.0.0.0:3025'
           wait-on-timeout: 10
           working-directory: system/cypress
-          config-file: ./system/cypress/cypress.config.js
+          config-file: ./system/cypress.config.js
           project: '../..'
           record: false
           publish-summary: true
