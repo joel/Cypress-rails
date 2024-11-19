@@ -1,2 +1,2 @@
 web: bin/rails server -p $PORT
-css: bin/bundle tailwindcss:watch
+css: bin/rails tailwindcss:watch
