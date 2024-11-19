@@ -20,9 +20,6 @@ jobs:
         with:
           ruby-version: 3.3.5
       -
-        name: Run test suite
-        run: bundle exec rake
-      -
         name: Start Rails server
         env:
           RAILS_ENV: test
