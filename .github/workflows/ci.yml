@@ -21,10 +21,16 @@ jobs:
           ruby-version: 3.3.5
           bundler-cache: true
       -
+        name: Start Rails server
+        env:
+          RAILS_ENV: test
+        run: |
+          bin/rails server -p 3025 -b 0.0.0.0 &
+          while ! nc -z localhost 3025; do sleep 1; done
+      -
         name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: "cd ../.. && ./bin/rails server -p 3025 -b 0.0.0.0"
           wait-on: 'http://localhost:3025'
           wait-on-timeout: 10
           working-directory: system/cypress
