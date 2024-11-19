@@ -4,7 +4,7 @@ on: [ push ]
 
 jobs:
 
-  lint:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -20,28 +20,5 @@ jobs:
         with:
           ruby-version: 3.3.5
       -
-        name: "Lint / rubocop"
-        run: |
-          gem install rubocop
-          gem install rubocop-performance
-          gem install rubocop-rake
-          gem install rubocop-rspec
-          gem install rubocop-rspec_rails
-          gem install rubocop-gitlab-security
-          gem install rubocop-rails
-          gem install rubocop-capybara
-          gem install rubocop-factory_bot
-          rubocop --parallel
-      -
-        name: "Lint / erblint"
-        run: bin/erblint --lint-all
-      -
-        name: "Security / brakeman"
-        run: |
-          gem install brakeman
-          brakeman --exit-on-warn --no-progress --color --output /dev/stdout
-      -
-        name: "Security / bundle-audit"
-        run: |
-          gem install bundle-audit
-          bundle-audit check --update -v
+        name: "Test"
+        run: bundle exec rake
