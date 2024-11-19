@@ -31,5 +31,8 @@ jobs:
         with:
           wait-on: 'http://localhost:3025'
           wait-on-timeout: 60
-          config-file: system/cypress.config.js
-          project: ./system
+          config-file: ../cypress.config.js
+          project: '../..'
+          record: false
+          publish-summary: true
+          component: false
