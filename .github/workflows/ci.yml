@@ -49,7 +49,7 @@ jobs:
       -
         name: Install Cypress
         run: |
-          cd system
+          cd system/cypress
           npm ci
       -
         name: Run Cypress tests
