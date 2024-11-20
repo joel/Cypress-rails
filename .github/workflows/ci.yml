@@ -54,8 +54,7 @@ jobs:
       -
         name: List Cypress Directory
         run: |
-          cd system/cypress
-          ls -R
+          tree -L 3 -I node_modules system/
       -
         name: Run Cypress Tests
         run: |
