@@ -36,7 +36,7 @@ jobs:
         env:
           RAILS_LOG_TO_STDOUT: true
         run: |
-          PORT=3025 bin/dev &
+          bin/rails server -p 3025 -b 0.0.0.0 &
           while ! nc -z localhost 3025; do sleep 1; done
       -
         name: Verify Rails Server Response
