@@ -52,7 +52,13 @@ jobs:
           cd system/cypress
           npm ci
       -
-        name: Run Cypress tests
+        name: List Cypress Directory
         run: |
           cd system/cypress
-          npx cypress run
+          ls -R
+      -
+        name: Run Cypress Tests
+        run: |
+          cd system/cypress
+          npx cypress run --browser chrome --config-file cypress.config.js --headed --no-exit --verbose
+
