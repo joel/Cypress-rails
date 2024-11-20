@@ -7,9 +7,11 @@ env:
 
 jobs:
 
-  test:
+  install:
 
     runs-on: ubuntu-latest
+
+    # container: cypress/browsers:node12.18.3-chrome87-ff82
 
     steps:
       -
@@ -48,16 +50,33 @@ jobs:
           bin/rails db:migrate:status
       -
         name: Install Cypress
-        run: |
-          cd system/cypress
-          npm ci
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      # -
+      #   name: Install Cypress
+      #   run: |
+      #     cd system/cypress
+      #     npm ci
       -
         name: List Cypress Directory
         run: |
           tree -L 3 -I node_modules system/
+      # -
+      #   name: Run Cypress Tests
+      #   run: |
+      #     cd system/cypress
+      #     npx cypress run --browser chrome
       -
-        name: Run Cypress Tests
-        run: |
-          cd system/cypress
-          npx cypress run --browser chrome
-
+        name: Run Cypress UI Tests - Chrome
+        uses: cypress-io/github-action@v2
+        with:
+          install: true
+          # start: yarn start:ci
+          wait-on: "http://localhost:3025"
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: "UI - Chrome"
+          spec: system/cypress/e2e/*
