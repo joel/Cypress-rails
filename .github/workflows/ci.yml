@@ -48,11 +48,11 @@ jobs:
         name: Check for Pending Migrations
         run: |
           bin/rails db:migrate:status
-      -
-        name: Install Cypress
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
+      # -
+      #   name: Install Cypress
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     runTests: false
       # -
       #   name: Install Cypress
       #   run: |
@@ -69,7 +69,7 @@ jobs:
       #     npx cypress run --browser chrome
       -
         name: Run Cypress UI Tests - Chrome
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
           install: true
           start: bin/rails server -p 3025 -b 0.0.0.0
