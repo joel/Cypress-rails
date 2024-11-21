@@ -33,17 +33,17 @@ jobs:
       -
         name: Run test suite
         run: bundle exec rake
-      -
-        name: Start Rails server
-        env:
-          RAILS_LOG_TO_STDOUT: true
-        run: |
-          bin/rails server -p 3025 -b 0.0.0.0 &
-          while ! nc -z localhost 3025; do sleep 1; done
-      -
-        name: Verify Rails Server Response
-        run: |
-          curl -I http://localhost:3025
+      # -
+      #   name: Start Rails server
+      #   env:
+      #     RAILS_LOG_TO_STDOUT: true
+      #   run: |
+      #     bin/rails server -p 3025 -b 0.0.0.0 &
+      #     while ! nc -z localhost 3025; do sleep 1; done
+      # -
+      #   name: Verify Rails Server Response
+      #   run: |
+      #     curl -I http://localhost:3025
       -
         name: Check for Pending Migrations
         run: |
@@ -72,7 +72,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           install: true
-          # start: yarn start:ci
+          start: bin/rails server -p 3025 -b 0.0.0.0
           wait-on: "http://localhost:3025"
           wait-on-timeout: 120
           browser: chrome
