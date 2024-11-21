@@ -80,3 +80,4 @@ jobs:
           parallel: true
           group: "UI - Chrome"
           spec: system/cypress/e2e/*
+          working-directory: system/cypress
