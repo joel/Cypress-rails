@@ -79,5 +79,5 @@ jobs:
           # record: true
           # parallel: true
           # group: "UI - Chrome"
-          spec: system/cypress/e2e/*
+          spec: e2e/*
           working-directory: system/cypress
