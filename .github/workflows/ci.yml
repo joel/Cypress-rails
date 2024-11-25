@@ -25,6 +25,7 @@ jobs:
         run: |
           bin/rails db:create
           bin/rails db:schema:load
+          bin/rails db:seed
       -
         name: Precompile Assets
         run: bin/rails assets:precompile
@@ -44,7 +45,7 @@ jobs:
       -
         name: Verify Rails Server Response
         run: |
-          curl -I http://localhost:3025
+          curl -I http://localhost:3025/posts
       -
         name: Check for Pending Migrations
         run: |
