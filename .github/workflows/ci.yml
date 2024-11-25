@@ -51,12 +51,22 @@ jobs:
         run: |
           tree -L 3 -I node_modules system/
       -
+        name: Install Dependencies for Headless Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libcups2 \
+            libdrm2 libxdamage1 libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 \
+            libpangocairo-1.0-0 libasound2 libatspi2.0-0 libgtk-3-0 libxcomposite1 libxshmfence1
+      -
+        name: Verify Chrome Installation
+        run: google-chrome --version
+      -
         name: Run Cypress UI Tests - Chrome
         uses: cypress-io/github-action@v6
         with:
           install: true
           wait-on: "http://localhost:3025"
-          wait-on-timeout: 120
+          wait-on-timeout: 20
           browser: chrome
           headed: false
           spec: e2e/*
