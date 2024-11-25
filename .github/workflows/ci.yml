@@ -76,6 +76,7 @@ jobs:
           wait-on: "http://localhost:3025"
           wait-on-timeout: 120
           browser: chrome
+          headed: false
           # record: true
           # parallel: true
           # group: "UI - Chrome"
