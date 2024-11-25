@@ -2,9 +2,6 @@ name: CI
 
 on: [ push ]
 
-env:
-  RAILS_ENV: test
-
 jobs:
 
   install:
@@ -31,6 +28,9 @@ jobs:
       -
         name: Run test suite
         run: bundle exec rake
+      -
+        name: Precompile Assets
+        run: bin/rails assets:precompile
       -
         name: Start Rails server
         env:
