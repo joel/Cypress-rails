@@ -82,3 +82,6 @@ jobs:
           # group: "UI - Chrome"
           spec: e2e/*
           working-directory: system/cypress
+        env:
+          DEBUG: '@cypress/github-action'
+          ACTIONS_STEP_DEBUG: true
