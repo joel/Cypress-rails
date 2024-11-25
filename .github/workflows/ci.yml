@@ -11,8 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # container: cypress/browsers:node12.18.3-chrome87-ff82
-
     steps:
       -
         name: Checkout Source Code
@@ -48,40 +46,22 @@ jobs:
         name: Check for Pending Migrations
         run: |
           bin/rails db:migrate:status
-      # -
-      #   name: Install Cypress
-      #   uses: cypress-io/github-action@v2
-      #   with:
-      #     runTests: false
-      # -
-      #   name: Install Cypress
-      #   run: |
-      #     cd system/cypress
-      #     npm ci
       -
         name: List Cypress Directory
         run: |
           tree -L 3 -I node_modules system/
-      # -
-      #   name: Run Cypress Tests
-      #   run: |
-      #     cd system/cypress
-      #     npx cypress run --browser chrome
       -
         name: Run Cypress UI Tests - Chrome
         uses: cypress-io/github-action@v6
         with:
           install: true
-          # start: bin/rails server -p 3025 -b 0.0.0.0
           wait-on: "http://localhost:3025"
           wait-on-timeout: 120
           browser: chrome
           headed: false
-          # record: true
-          # parallel: true
-          # group: "UI - Chrome"
           spec: e2e/*
           working-directory: system/cypress
         env:
           DEBUG: '@cypress/github-action'
           ACTIONS_STEP_DEBUG: true
+          CYPRESS_BASE_URL: 'http://localhost:3025'
