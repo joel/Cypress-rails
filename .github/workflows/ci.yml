@@ -45,7 +45,7 @@ jobs:
       -
         name: Verify Rails Server Response
         run: |
-          curl -I http://localhost:3025/posts
+          curl -I http://0.0.0.0:3025/posts.json
       -
         name: Check for Pending Migrations
         run: |
