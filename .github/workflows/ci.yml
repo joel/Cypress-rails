@@ -36,8 +36,11 @@ jobs:
         env:
           RAILS_LOG_TO_STDOUT: true
         run: |
-          bin/rails server -p 3025 -b 0.0.0.0 &
+          bin/rails server -e development -p 3025 -b 0.0.0.0 > rails_server.log 2>&1 &
           while ! nc -z localhost 3025; do sleep 1; done
+      -
+        name: Output Rails Server Log
+        run: cat rails_server.log
       -
         name: Verify Rails Server Response
         run: |
