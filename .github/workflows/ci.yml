@@ -67,17 +67,12 @@ jobs:
         name: Verify Chrome Installation
         run: google-chrome --version
       -
-        name: Run Cypress UI Tests - Chrome
-        uses: cypress-io/github-action@v6
-        with:
-          install: true
-          wait-on: "http://localhost:3025"
-          wait-on-timeout: 20
-          browser: chrome
-          headed: false
-          spec: e2e/*
-          working-directory: system/cypress
-        env:
-          DEBUG: '@cypress/github-action'
-          ACTIONS_STEP_DEBUG: true
-          CYPRESS_BASE_URL: 'http://localhost:3025'
+        name: Install Cypress
+        run: |
+          cd system/cypress
+          npm ci
+      -
+        name: Run Cypress Tests
+        run: |
+          cd system/cypress
+          npx cypress run --browser chrome
